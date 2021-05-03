@@ -22,15 +22,15 @@ Underpin, it should work as-expected.
 
 ## Decision Lists
 
-Typically, WordPress plugins rely solely on WordPress hooks to determine extended logic. This works for simple solutions,
-but it becomes cumbersome very fast as soon as several plugins are attempting to override one-another. The biggest issue
-is that the actual logic that determines the decision is _decentralized_. Since there isn't a single source-of-truth to
-dictate the order of logic, let along what the actual _choices are_, you have no easy way of understanding _why_ a plugin
-decided to-do what it did.
+Typically, WordPress plugins rely solely on WordPress hooks to determine extended logic. This works for simple
+solutions, but it becomes cumbersome very fast as soon as several plugins are attempting to override one-another. The
+biggest issue is that the actual logic that determines the decision is _decentralized_. Since there isn't a single
+source-of-truth to dictate the order of logic, let along what the actual _choices are_, you have no easy way of
+understanding _why_ a plugin decided to-do what it did.
 
-Decision lists aim to make this easier to work with by making the extensions all _centralized_ in a single registry. This
-registry is exported in the Underpin console when `WP_DEBUG` is enabled, so it is abundantly clear _what_ the actual hierarchy
-is for this site.
+Decision lists aim to make this easier to work with by making the extensions all _centralized_ in a single registry.
+This registry is exported in the Underpin console when `WP_DEBUG` is enabled, so it is abundantly clear _what_ the
+actual hierarchy is for this site.
 
 If you're debugging a live site, you can output the decision list using a PHP console tool, such as debug bar console.
 
@@ -129,11 +129,11 @@ Notice that I'm using anonymous classes here, just to keep everything in a singl
 use anonymous classes. In fact, in most cases you shouldn't. If you pass a reference to the class as a string, it will
 not instantiate the class unless it's explicitly called. This saves on resources and keeps things fast.
 
-The `$priority` value inside each class tells the decision tree which option to try to use first. If it returns a `WP_Error`, it moves on
-to the next one. As soon as it finds an option that returns `true`, it grabs the value from the `valid_actions` method, and move on.
+The `$priority` value inside each class tells the decision tree which option to try to use first. If it returns
+a `WP_Error`, it moves on to the next one. As soon as it finds an option that returns `true`, it grabs the value from
+the `valid_actions` method, and move on.
 
 Like the custom logger class, this needs to be registered inside `Service_Locator`.
-
 
 ```php
 	/**
@@ -208,7 +208,7 @@ A very basic example could look something like this.
 				'class' => '\Underpin_Decision_Lists\Factories\Decision_Instance',
 				'args'  => [ [
 					'valid_callback' => '__return_true',
-					'valid_actions'  => '__return_empty_array',
+					'valid_actions_callback'  => '__return_empty_array',
 					'name'           => 'Test Decision',
 					'dedecision listion'    => 'A single decision',
 					'priority'       => 500
@@ -220,7 +220,7 @@ A very basic example could look something like this.
 				'class' => '\Underpin_Decision_Lists\Factories\Decision_Instance',
 				'args'  => [ [
 					'valid_callback' => '__return_true',
-					'valid_actions'  => '__return_empty_array',
+					'valid_actions_callback'  => '__return_empty_array',
 					'name'           => 'Test Decision Two',
 					'dedecision listion'    => 'A single decision',
 					'priority'       => 1000

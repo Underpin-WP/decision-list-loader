@@ -10,6 +10,7 @@
 namespace Underpin_Decision_Lists\Factories;
 
 
+use Underpin\Traits\Instance_Setter;
 use Underpin_Cron_Jobs\Abstracts\Cron_Job;
 use Underpin_Decision_Lists\Abstracts\Decision;
 use function Underpin\underpin;
@@ -26,6 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package Underpin\Abstracts
  */
 class Decision_Instance extends Decision {
+	use Instance_Setter;
 
 	protected $valid_callback = '';
 
@@ -38,20 +40,7 @@ class Decision_Instance extends Decision {
 	 */
 	public function __construct( $args = [] ) {
 		// Override default params.
-		foreach ( $args as $arg => $value ) {
-			if ( isset( $this->$arg ) ) {
-				$this->$arg = $value;
-				unset( $args[ $arg ] );
-			}
-		}
-	}
-
-	function cron_action() {
-		if ( is_wp_error( $this->action ) ) {
-			return false;
-		}
-
-		return call_user_func( $this->action );
+		$this->set_values( $args );
 	}
 
 	public function is_valid( $params = [] ) {
