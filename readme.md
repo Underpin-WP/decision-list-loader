@@ -1,24 +1,24 @@
-# Underpin Script Loader
+# Underpin decision list Loader
 
-Loader That assists with adding scripts to a WordPress website.
+Loader That assists with adding decision lists to a WordPress website.
 
 ## Installation
 
 ### Using Composer
 
-`composer require underpin/loaders/scripts`
+`composer require underpin/decision-list-loader`
 
 ### Manually
 
 This plugin uses a built-in autoloader, so as long as it is required _before_
 Underpin, it should work as-expected.
 
-`require_once(__DIR__ . '/underpin-scripts/scripts.php');`
+`require_once(__DIR__ . '/underpin-decision-lists/decision-lists.php');`
 
 ## Setup
 
 1. Install Underpin. See [Underpin Docs](https://www.github.com/underpin/underpin)
-1. Register new scripts as-needed.
+1. Register new decision lists as-needed.
 
 ## Decision Lists
 
@@ -69,7 +69,7 @@ With a decision list, however, this is put inside of a class, and that class can
  */
 class Email_To extends Decision_List {
 
-	public $description = 'Determines which email address this plugin should use.';
+	public $dedecision listion = 'Determines which email address this plugin should use.';
 	public $name = 'Email Address';
 
 	/**
@@ -81,7 +81,7 @@ class Email_To extends Decision_List {
 
 			public $id = 'option';
 			public $name = 'Option Value';
-			public $description = 'Uses the value of the db option, if it is set.';
+			public $dedecision listion = 'Uses the value of the db option, if it is set.';
 			public $priority = 100;
 
 
@@ -110,7 +110,7 @@ class Email_To extends Decision_List {
 
 			public $id = 'hard_coded';
 			public $name = 'Hard coded email';
-			public $description = 'Uses a hard-coded email address for this site.';
+			public $dedecision listion = 'Uses a hard-coded email address for this site.';
 			public $priority = 1000;
 
 			public function is_valid( $params = [] ) {
@@ -179,7 +179,7 @@ plugin_name_replace_me()->decision_lists()->get('email')->add('custom_option',ne
   // Force this to run before all other options
   public $priority = 50;
   public $name = 'Custom Option Name';
-  public $description = 'This custom name is used in an extension, and overrides the default';
+  public $dedecision listion = 'This custom name is used in an extension, and overrides the default';
 
   public function is_valid($params = []){
     // TODO: Implement is_valid() method.
@@ -210,7 +210,7 @@ A very basic example could look something like this.
 					'valid_callback' => '__return_true',
 					'valid_actions'  => '__return_empty_array',
 					'name'           => 'Test Decision',
-					'description'    => 'A single decision',
+					'dedecision listion'    => 'A single decision',
 					'priority'       => 500
 				] ],
 			],
@@ -222,7 +222,7 @@ A very basic example could look something like this.
 					'valid_callback' => '__return_true',
 					'valid_actions'  => '__return_empty_array',
 					'name'           => 'Test Decision Two',
-					'description'    => 'A single decision',
+					'dedecision listion'    => 'A single decision',
 					'priority'       => 1000
 				] ],
 			],
@@ -232,10 +232,10 @@ A very basic example could look something like this.
 ] );
 ```
 
-Alternatively, you can extend `Script` and reference the extended class directly, like so:
+Alternatively, you can extend `decision list` and reference the extended class directly, like so:
 
 ```php
-underpin()->scripts()->add('key','Namespace\To\Class');
+underpin()->decision lists()->add('key','Namespace\To\Class');
 ```
 
 This is especially useful when using decision lists, since they have a tendency to get quite long, and nest deep.
