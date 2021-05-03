@@ -1,6 +1,6 @@
 {
-  "name": "underpin/script-loader",
-  "description": "Script Loader for Underpin",
+  "name": "underpin/decision-list-loader",
+  "description": "Script task loader for Underpin",
   "type": "library",
   "license": "GPL 2.0",
   "authors": [

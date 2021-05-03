@@ -44,35 +44,11 @@ class Decision_Instance extends Decision {
 	}
 
 	public function is_valid( $params = [] ) {
-		if ( is_callable( $this->valid_callback ) ) {
-			return call_user_func( $this->valid_callback, $params );
-		}
-
-		return new \WP_Error(
-			'invalid_callback',
-			'The provided valid callback is invalid',
-			[
-				'callback' => $this->valid_callback,
-				'id'       => $this->id,
-				'stack'    => debug_backtrace(),
-			]
-		);
+		return $this->set_callable( $this->valid_callback, $params );
 	}
 
 	public function valid_actions( $params = [] ) {
-		if ( is_callable( $this->valid_actions_callback ) ) {
-			return call_user_func( $this->valid_actions_callback, $params );
-		}
-
-		return new \WP_Error(
-			'invalid_callback',
-			'The provided valid actions callback is invalid',
-			[
-				'callback' => $this->valid_actions_callback,
-				'id'       => $this->id,
-				'stack'    => debug_backtrace(),
-			]
-		);
+		return $this->set_callable( $this->valid_actions_callback, $params );
 	}
 
 }

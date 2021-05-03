@@ -17,7 +17,7 @@ Underpin, it should work as-expected.
 
 ## Setup
 
-1. Install Underpin. See [Underpin Docs](https://www.github.com/underpin/underpin)
+1. Install Underpin. See [Underpin Docs](https://www.github.com/underpin-wp/underpin)
 1. Register new decision lists as-needed.
 
 ## Decision Lists
@@ -198,36 +198,26 @@ plugin_name_replace_me()->decision_lists()->get('email')->add('custom_option',ne
 A very basic example could look something like this.
 
 ```php
-
 \Underpin\underpin()->decision_lists()->add( 'example_decision_list', [
-	'class' => '\Underpin_Decision_Lists\Factories\Decision_List_Instance',
-	'args'  => [
+	[
+		// Decision one
 		[
-			// Decision one
-			[
-				'class' => '\Underpin_Decision_Lists\Factories\Decision_Instance',
-				'args'  => [ [
-					'valid_callback' => '__return_true',
-					'valid_actions_callback'  => '__return_empty_array',
-					'name'           => 'Test Decision',
-					'dedecision listion'    => 'A single decision',
-					'priority'       => 500
-				] ],
-			],
-
-			// Decision two
-			[
-				'class' => '\Underpin_Decision_Lists\Factories\Decision_Instance',
-				'args'  => [ [
-					'valid_callback' => '__return_true',
-					'valid_actions_callback'  => '__return_empty_array',
-					'name'           => 'Test Decision Two',
-					'dedecision listion'    => 'A single decision',
-					'priority'       => 1000
-				] ],
-			],
-
+			'valid_callback'         => '__return_true',
+			'valid_actions_callback' => '__return_empty_string',
+			'name'                   => 'Test Decision',
+			'description'            => 'A single decision',
+			'priority'               => 500,
 		],
+
+		// Decision two
+		[
+			'valid_callback'         => '__return_true',
+			'valid_actions_callback' => '__return_empty_array',
+			'name'                   => 'Test Decision Two',
+			'description'            => 'A single decision',
+			'priority'               => 1000,
+		],
+
 	],
 ] );
 ```
@@ -235,8 +225,23 @@ A very basic example could look something like this.
 Alternatively, you can extend `decision list` and reference the extended class directly, like so:
 
 ```php
-underpin()->decision lists()->add('key','Namespace\To\Class');
+underpin()->decision_lists()->add('key','Namespace\To\Class');
 ```
 
 This is especially useful when using decision lists, since they have a tendency to get quite long, and nest deep.
 
+## Getting Decision Results
+
+When a decision list determines an action, it does three things:
+
+1. Sorts all decisions by priority, smallest numbers first.
+1. Loops through each item, and stops on the first decision that passes their respective test.
+1. Returns the result of the decision's `valid_actions` callback.
+
+The example above would return `''`, because the first item to pass would be the item with the smallest priority that will pass.
+
+```php
+underpin()->decision_lists()->decide('example_decision_list', [] );
+```
+
+The second argument, `$params` is an array of arguments that are passed to both the `valid_callback` and `valid_actions_callback`.

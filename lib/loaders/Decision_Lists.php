@@ -32,12 +32,12 @@ class Decision_Lists extends Loader_Registry {
 	 */
 	protected $abstraction_class = 'Underpin_Decision_Lists\Abstracts\Registries\Decision_List';
 
+	protected $default_factory = 'Underpin_Decision_Lists\Factories\Decision_List_Instance';
+
 	/**
 	 * @inheritDoc
 	 */
-	protected function set_default_items() {
-		$this->add( 'event_type_purge_frequency', 'Underpin_Decision_Lists\Decisions\Event_Type_Purge_Frequency\Event_Type_Purge_Frequency' );
-	}
+	protected function set_default_items() {}
 
 	/**
 	 * @param string $key

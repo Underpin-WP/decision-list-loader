@@ -11,6 +11,7 @@ namespace Underpin_Decision_Lists\Abstracts\Registries;
 
 
 use Underpin\Abstracts\Registries\Loader_Registry;
+use Underpin_Decision_Lists\Abstracts\Decision;
 use function Underpin\underpin;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -31,6 +32,8 @@ abstract class Decision_List extends Loader_Registry {
 	 */
 	protected $abstraction_class = 'Underpin_Decision_Lists\Abstracts\Decision';
 
+	protected $default_factory = 'Underpin_Decision_Lists\Factories\Decision_Instance';
+
 	protected $params = [];
 
 	/**
@@ -39,6 +42,7 @@ abstract class Decision_List extends Loader_Registry {
 	 * @since 1.0.0
 	 *
 	 * @param array $params
+	 *
 	 * @return array|\WP_Error
 	 */
 	public function decide( $params = [] ) {
