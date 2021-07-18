@@ -25,7 +25,7 @@ Underpin, it should work as-expected.
 Typically, WordPress plugins rely solely on WordPress hooks to determine extended logic. This works for simple
 solutions, but it becomes cumbersome very fast as soon as several plugins are attempting to override one-another. The
 biggest issue is that the actual logic that determines the decision is _decentralized_. Since there isn't a single
-source-of-truth to dictate the order of logic, let along what the actual _choices are_, you have no easy way of
+source-of-truth to dictate the order of logic, let alone what the actual _choices are_, you have no easy way of
 understanding _why_ a plugin decided to-do what it did.
 
 Decision lists aim to make this easier to work with by making the extensions all _centralized_ in a single registry.
