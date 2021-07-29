@@ -199,25 +199,22 @@ A very basic example could look something like this.
 
 ```php
 \Underpin\underpin()->decision_lists()->add( 'example_decision_list', [
+	// Decision one
 	[
-		// Decision one
-		[
-			'valid_callback'         => '__return_true',
-			'valid_actions_callback' => '__return_empty_string',
-			'name'                   => 'Test Decision',
-			'description'            => 'A single decision',
-			'priority'               => 500,
-		],
+		'valid_callback'         => '__return_true',
+		'valid_actions_callback' => '__return_empty_string',
+		'name'                   => 'Test Decision',
+		'description'            => 'A single decision',
+		'priority'               => 500,
+	],
 
-		// Decision two
-		[
-			'valid_callback'         => '__return_true',
-			'valid_actions_callback' => '__return_empty_array',
-			'name'                   => 'Test Decision Two',
-			'description'            => 'A single decision',
-			'priority'               => 1000,
-		],
-
+	// Decision two
+	[
+		'valid_callback'         => '__return_true',
+		'valid_actions_callback' => '__return_empty_array',
+		'name'                   => 'Test Decision Two',
+		'description'            => 'A single decision',
+		'priority'               => 1000,
 	],
 ] );
 ```
