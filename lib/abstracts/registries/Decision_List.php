@@ -83,14 +83,15 @@ abstract class Decision_List extends Loader_Registry {
 					$invalid_decisions[ $decision->id ] = $valid;
 				} else {
 
-					// Otherwise, we have found the decision to run, so break outta here.
+					// Otherwise, we have found the decision to run, so get outta here.
+					$valid_decision = $decision;
 					break;
 				}
 			}
 
 			// If the decision did not get set, return an error.
-			if ( ! isset( $decision ) ) {
-				$decision = underpin()->logger()->log_as_error(
+			if ( ! isset( $valid_decision ) ) {
+				return underpin()->logger()->log_as_error(
 					'error',
 					'decision_list_could_not_decide',
 					'A decision list ran, but all decisions returned false.',
@@ -98,7 +99,7 @@ abstract class Decision_List extends Loader_Registry {
 				);
 			}
 
-			$result = [ 'decision' => $decision, 'invalid_decisions' => $invalid_decisions ];
+			$result = [ 'decision' => $valid_decision, 'invalid_decisions' => $invalid_decisions ];
 		}
 
 		// Fire actions specific to this list that should happen every time a decision list runs.
@@ -142,7 +143,7 @@ abstract class Decision_List extends Loader_Registry {
 	 * @since 1.0.0
 	 */
 	public function sort_decisions() {
-		$this->uasort( function( Decision $a, Decision $b ) {
+		$this->uasort( function ( Decision $a, Decision $b ) {
 			return $a->priority < $b->priority ? -1 : 1;
 		} );
 	}
